@@ -1,28 +1,15 @@
 
 {-# LANGUAGE ScopedTypeVariables #-}
 
-import Data.IORef
 import Test.Tasty
-import Test.Tasty.HUnit
-import System.Exit
-import Control.Exception
+import Common
 import Hw0
 
-type Score = IORef (Int, Int)
-
 main :: IO ()
-main = do
-  sc <- initScore
-  defaultMain (tests sc) `catch` (\(e :: ExitCode) -> do
-    (n, tot) <- readIORef sc
-    putStrLn ("OVERALL SCORE = " ++ show n ++ " / "++ show tot)
-    throwIO e)
-
-tests :: Score -> TestTree
-tests x = testGroup "Tests"
-  [ unit1 x
-  , unit2 x
-  ]
+main = runTests
+  [ unit1 
+  , unit2 
+  ] 
 
 unit1 :: Score -> TestTree
 unit1 sc = testGroup "Unit 1"
@@ -134,29 +121,3 @@ unit2 sc = testGroup "Unit 2" [
   where
     scoreTest :: (Show b, Eq b) => ((a -> b), a, b, Int, String) -> TestTree
     scoreTest = scoreTest' sc
-
---------------------------------------------------------------------------------
--- | Construct a single compiler test case from a `Program`
---------------------------------------------------------------------------------
-mkTest' :: (Show b, Eq b) => Score -> (a -> b) -> a -> b -> String -> TestTree
---------------------------------------------------------------------------------
-mkTest' sc f x r name = scoreTest' sc (f, x, r, 1, name)
-
---------------------------------------------------------------------------------
-scoreTest' :: (Show b, Eq b) => Score -> ((a -> b), a, b, Int, String) -> TestTree
---------------------------------------------------------------------------------
-scoreTest' sc (f, x, expR, points, name) =
-  testCase name $ do
-    updateTotal sc points
-    if (f x == expR)
-      then updateCurrent sc points
-      else assertFailure "Wrong Result"
-
-updateTotal :: Score -> Int -> IO ()
-updateTotal sc n = modifyIORef sc (\(x, y) -> (x, y + n))
-
-updateCurrent :: Score -> Int -> IO ()
-updateCurrent sc n = modifyIORef sc (\(x, y) -> (x + n, y))
-
-initScore :: IO Score
-initScore = newIORef (0, 0)
