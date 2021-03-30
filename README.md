@@ -1,13 +1,13 @@
 ---
-title: HW 0, due 10/5/2018
+title: HW 0
 headerImg: angles.jpg
 ---
 
 ## Download 
 
-1. Use the _fork link_ from the class website to create your private clone of the starter code.
+1. Use **github classroom link** to create your private clone of the starter code.
 
-2. Do `git clone https://github.com/ucsd-cse131-fa18/00-warmup-XXX` where `XXX` is your private repo.
+2. Do `git clone XYZ` where `XYZ` is your private repo's URL.
 
 3. Link your clone to the "upstream" to get any updates
 
@@ -24,8 +24,7 @@ $ make update
 4. Save (and submit) your work with: 
 
 ```
-$ git commit -a -m MESSAGE 
-$ git push 
+$ make turnin
 ```
 
 ## Overview
@@ -69,7 +68,7 @@ of tests which gives you a flavor of of these tests.
 When you run
 
 ```shell
-$ stack test
+$ make test
 ```
 
 Your last lines should have
@@ -98,19 +97,14 @@ but you will not be graded on this.
 
 ## Submission Instructions
 
-Before submitting your code, you have to fill [this form](https://goo.gl/forms/3KBuBTilmvMKFD223)
-to register your groups. We will use this form to match your ieng account
-username to your student id, so you **must** fill it even if you have
-worked on the assignment individually.
-
-To submit your code, just do:
+Before submitting your code, you fill in the names of your group members in `COLLABORATORS.md`. If this is empty, we will assume you have worked by yourself.
 
 ```bash
 $ make turnin 
 ```
 
 This will simply do a `git commit` followed by a `git push` to send us your code.
-**We will use the _most recent commit_ of your code (on `master` branch) as your submission.**
+**We will use the _most recent commit_ of your code (on `main` branch) as your submission.**
 
 
 ## Problem 1: [Roots and Persistence](http://mathworld.wolfram.com/AdditivePersistence.html)

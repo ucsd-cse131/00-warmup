@@ -17,70 +17,83 @@ unit1 sc = testGroup "Unit 1"
       sumList
       [1, 2, 3, 4]
       10
+      1
       "sample: sumList 1"
   , mkTest
       sumList
       [1, -2, 3, 5]
       7
+      1
       "sample: sumList 2"
   , mkTest
       sumList
       [1, 3, 5, 7, 9, 11]
       36
+      1
       "sample: sumList 3"
   , mkTest
       digitsOfInt
       3124
       [3, 1, 2, 4]
+      1
       "sample: digitsOfInt 1"
   , mkTest
       digitsOfInt
       352663
       [3, 5, 2, 6, 6, 3]
+      1
       "sample: digitsOfInt 2"
   , mkTest
       digits
       31243
       [3, 1, 2, 4, 3]
+      1
       "sample: digits 1"
   , mkTest
       digits
       (-23422)
       [2, 3, 4, 2, 2]
+      1
       "sample: digits 2"
   , mkTest
       additivePersistence
       9876
+      2
       2
       "sample: additivePersistence 1"
   , mkTest
       digitalRoot
       9876
       3
+      2
       "sample: digitalRoot"
   , mkTest
       listReverse
       [1, 2, 3, 4]
       [4, 3, 2, 1]
+      1
       "sample: reverse 1"
   , mkTest
       listReverse
       ["a", "b", "c", "d"]
       ["d", "c", "b", "a"]
+      1
       "sample: rev 2"
   , mkTest
       palindrome
       "malayalam"
       True
+      1
       "sample: palindrome 1"
   , mkTest
       palindrome
       "myxomatosis"
       False
+      1
       "sample: palindrome 2"
   ]
   where
-    mkTest :: (Show b, Eq b) => (a -> b) -> a -> b -> String -> TestTree
+    mkTest :: (Show b, Eq b) => (a -> b) -> a -> b -> Int -> String -> TestTree
     mkTest = mkTest' sc
 
 unit2 :: Score -> TestTree
